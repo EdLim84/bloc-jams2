@@ -4,7 +4,7 @@
      box-sizing: border-box;
  }
 html {
-  height: 1000%; /* makes sure our HTML takes up 100% of the browser window */
+  height: 100%; /* makes sure our HTML takes up 100% of the browser window */
   font-size: 100%;
 }
 
