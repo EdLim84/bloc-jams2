@@ -1,43 +1,39 @@
 
   // our Javascript will go hero-content
-  alert("why hello there! I'm a wee bit of JavaScript. Weeeeee!");
-var pointsArray = document.getElementsByClassName('point');
 
+var animatePoints = function() {
 
+    var revealPoint = function() {
 
-    var revealPoint = function(point) {
-        point.style.opacity = 1;
-        point.style.transform = "scaleX(1) translateY(0)";
-        point.style.msTransform = "scaleX(1) translateY(0)";
-        point.style.WebkitTransform = "scaleX(1) translateY(0)";
+      $(this).css({
+           opacity: 1,
+           transform: 'scaleX(1) translateY(0)'
+       });
 
   };
 
-    var animatePoints = function(points) {
-        forEach(points, revealPoint);
 
-
-    for (var i = 0; i < points.length; i++) {
-      revealPoint(i);
-    }
+       $.each($('.point'), revealPoint);
 };
 
 
 
-window.onload = function() {
-  // Automatically animate the points on a tall screen where scrolling can't trigger the animation
-      if (window.innerHeight > 950) {
-          animatePoints(pointsArray);
+ $(window).load(function() {
+
+  if ($(window).height() > 950) {
+       animatePoints();
 
       }
 
-  var sellingPoints = document.getElementsByClassName('selling-points')[0];
-  var scrollDistance = sellingPoints.getBoundingClientRect().top - window.innerHeight + 200;
 
-  window.addEventListener('scroll', function(event) {
+   var scrollDistance = $('.selling-points').offset().top - $(window).height() + 200;
 
-      if (document.documentElement.scrollTop || document.body.scrollTop >= scrollDistance) {
-        animatePoints(pointsArray);
+
+ $(window).scroll(function(event) {
+
+
+   if ($(window).scrollTop() >= scrollDistance) {
+            animatePoints();
       }
     });
-}
+    });
