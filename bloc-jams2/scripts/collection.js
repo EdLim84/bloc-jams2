@@ -1,4 +1,3 @@
-
 var buildCollectionItemTemplate = function() {
     var template =
 }
