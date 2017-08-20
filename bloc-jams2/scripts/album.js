@@ -1,21 +1,23 @@
 var setSong = function(songNumber) {
     if (currentSoundFile) {
-      currentSoundFile.stop();
+        currentSoundFile.stop();
     }
-
     currentlyPlayingSongNumber = parseInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
-
+    // Assign a new Buzz sound object
     currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
          // #2
          formats: [ 'mp3' ],
          preload: true
      });
 
-
+    setVolume(currentVolume);
 };
 
-    setVolume(currentVolume);
+var seek = function(time) {
+    if (currentSoundFile) {
+        currentSoundFile.setTime(time);
+    }
 };
 
 var setVolume = function(volume) {
@@ -261,7 +263,7 @@ var previousSong = function() {
     setSong(currentSongIndex + 1);
 
     currentSoundFile.play();
-
+    updateSeekBarWhileSongPlays();
 
     // Update the Player Bar information
     updatePlayerBarSong();
